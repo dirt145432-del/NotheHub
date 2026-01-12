@@ -1,18 +1,18 @@
-local CorrectKey = "GeminiAndNotheHub" -- Yeni anahtarın bu oldu!
+local CorrectKey = "GeminiAndNotheHub" -- Belirlediğimiz özel anahtar
 local UserInput = ""
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
 -- GİRİŞ EKRANI
 local AuthWindow = Library.CreateLib("Nothe Hub - Giriş Sistemi", "DarkTheme")
-local AuthTab = AuthWindow:NewTab("Giriş")
-local AuthSection = AuthTab:NewSection("Lütfen Anahtarı Giriniz")
+local AuthTab = AuthWindow:NewTab("Anahtar")
+local AuthSection = AuthTab:NewSection("Giriş Yapmak İçin Anahtarı Girin")
 
-AuthSection:NewTextBox("Anahtar:", "Anahtarı yazın ve enterlayın", function(text)
+AuthSection:NewTextBox("Anahtar Gir:", "Anahtarı buraya yazın", function(text)
     UserInput = text
 end)
 
-AuthSection:NewButton("Kontrol Et", "Anahtarı doğrular ve menüyü açar", function()
+AuthSection:NewButton("Kontrol Et", "Anahtarı doğrular", function()
     if UserInput == CorrectKey then
         game:GetService("CoreGui"):FindFirstChild("Nothe Hub - Giriş Sistemi"):Destroy()
         
@@ -45,6 +45,13 @@ AuthSection:NewButton("Kontrol Et", "Anahtarı doğrular ve menüyü açar", fun
             game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
         end)
     else
-        print("Hatalı Anahtar!")
+        -- Yanlış Anahtar Bildirimi
+        Library:Notify("HATA!", "Girdiğiniz anahtar yanlış. Lütfen tekrar deneyin.", 5)
     end
+end)
+
+-- ANAHTARI KOPYALAMA BUTONU
+AuthSection:NewButton("Anahtarı Kopyala (Key Al)", "Anahtarı panoya kopyalar", function()
+    setclipboard(CorrectKey)
+    Library:Notify("BAŞARILI!", "Anahtar panoya kopyalandı! Kutuya yapıştırabilirsiniz.", 5)
 end)

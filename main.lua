@@ -2,27 +2,37 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 local Window = Library.CreateLib("Nothe Hub", "DarkTheme")
 
 -- Sekmeler
-local Tab1 = Window:NewTab("Script Listesi")
-local Section1 = Tab1:NewSection("Brookhaven & Genel")
+local Tab1 = Window:NewTab("Oyun Scriptleri")
+local Section1 = Tab1:NewSection("Popüler Oyunlar")
 
 local Tab2 = Window:NewTab("Oyuncu")
 local Section2 = Tab2:NewSection("Karakter Ayarları")
 
--- Chaos Hub Butonu
-Section1:NewButton("Chaos Hub (Brookhaven)", "Chaos Hub Scriptini Yukler", function()
-    loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Chaos-Hub-31051"))()
-end)
-
--- Chilli Hub Butonu
-Section1:NewButton("Chilli Hub", "Chilli Hub Scriptini Yukler", function()
+-- Steal A Brainrot (Chilli Hub yüklenecek şekilde ayarlandı)
+Section1:NewButton("Steal A Brainrot (Chilli)", "Chilli Hub Scriptini Yukler", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/ChilliHacks/ChilliHub/main/Source"))()
 end)
 
--- Oyuncu Özellikleri (Sliderlar)
-Section2:NewSlider("Hız (WalkSpeed)", "Hizini Ayarlar", 500, 16, function(s)
+-- MM2 (Murder Mystery 2)
+Section1:NewButton("Vynixu (MM2)", "Esp ve Sheriff Aim", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Vynixu/VynixuLib/main/MM2/Source.lua"))()
+end)
+
+-- Blox Fruits
+Section1:NewButton("Redz Hub (Blox Fruits)", "Auto Farm", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/REDZHUB/BloxFruits/main/redz7.lua"))()
+end)
+
+-- Brookhaven
+Section1:NewButton("Chaos Hub (Brookhaven)", "Brookhaven hilesi", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Chaos-Hub-31051"))()
+end)
+
+-- Oyuncu Özellikleri
+Section2:NewSlider("Hız (WalkSpeed)", "Hızını Ayarlar", 500, 16, function(s)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
-Section2:NewSlider("Zıplama (JumpPower)", "Ziplama Gucunu Ayarlar", 500, 50, function(s)
+Section2:NewSlider("Zıplama (JumpPower)", "Zıplama Gücü", 500, 50, function(s)
     game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
 end)

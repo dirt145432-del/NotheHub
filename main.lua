@@ -1,4 +1,4 @@
-local CorrectKey = "GeminiAndNotheHub" -- Belirlediğimiz özel anahtar
+local CorrectKey = "GeminiAndNotheHub"
 local UserInput = ""
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
@@ -6,14 +6,15 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 -- GİRİŞ EKRANI
 local AuthWindow = Library.CreateLib("Nothe Hub - Giriş Sistemi", "DarkTheme")
 local AuthTab = AuthWindow:NewTab("Anahtar")
-local AuthSection = AuthTab:NewSection("Giriş Yapmak İçin Anahtarı Girin")
+local AuthSection = AuthTab:NewSection("Lütfen Anahtarı Giriniz")
 
-AuthSection:NewTextBox("Anahtar Gir:", "Anahtarı buraya yazın", function(text)
+AuthSection:NewTextBox("Anahtarı Yaz:", "Yazdıktan sonra Enter'a basın", function(text)
     UserInput = text
 end)
 
-AuthSection:NewButton("Kontrol Et", "Anahtarı doğrular", function()
-    if UserInput == CorrectKey then
+AuthSection:NewButton("Kontrol Et", "Girişi Doğrula", function()
+    -- Boşlukları temizleyerek kontrol et (Daha güvenli)
+    if UserInput == CorrectKey or UserInput:gsub("%s+", "") == CorrectKey then
         game:GetService("CoreGui"):FindFirstChild("Nothe Hub - Giriş Sistemi"):Destroy()
         
         -- ASIL HİLE MENÜSÜ
@@ -23,7 +24,6 @@ AuthSection:NewButton("Kontrol Et", "Anahtarı doğrular", function()
         local Tab2 = Window:NewTab("Ayarlar")
         local Section2 = Tab2:NewSection("Menü Kontrolü")
 
-        -- Oyun Butonların
         Section1:NewButton("Steal A Brainrot (Chilli)", "Chilli Hub Yukler", function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/ChilliHacks/ChilliHub/main/Source"))()
         end)
@@ -37,21 +37,18 @@ AuthSection:NewButton("Kontrol Et", "Anahtarı doğrular", function()
             loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Chaos-Hub-31051"))()
         end)
 
-        -- Ayarlar ve Kapatma
-        Section2:NewButton("Menüyü Gizle", "Menüyü ekranından saklar", function()
+        Section2:NewButton("Menüyü Gizle", "Menüyü saklar", function()
             Library:ToggleUI()
         end)
-        Section2:NewSlider("Hız (WalkSpeed)", "Hızını Ayarlar", 500, 16, function(s)
+        Section2:NewSlider("Hız (WalkSpeed)", "Hız Ayarı", 500, 16, function(s)
             game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
         end)
     else
-        -- Yanlış Anahtar Bildirimi
-        Library:Notify("HATA!", "Girdiğiniz anahtar yanlış. Lütfen tekrar deneyin.", 5)
+        Library:Notify("HATA!", "Yanlış anahtar! Lütfen tekrar deneyin.", 5)
     end
 end)
 
--- ANAHTARI KOPYALAMA BUTONU
-AuthSection:NewButton("Anahtarı Kopyala (Key Al)", "Anahtarı panoya kopyalar", function()
+AuthSection:NewButton("Anahtarı Kopyala (Key Al)", "Kopyalar", function()
     setclipboard(CorrectKey)
-    Library:Notify("BAŞARILI!", "Anahtar panoya kopyalandı! Kutuya yapıştırabilirsiniz.", 5)
+    Library:Notify("KOPYALANDI!", "Anahtar panoya alındı.", 5)
 end)

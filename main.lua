@@ -33,4 +33,18 @@ AuthSection:NewButton("Kontrol Et", "Anahtarı doğrular ve menüyü açar", fun
         Section1:NewButton("Redz Hub (Blox Fruits)", "Auto Farm", function()
             loadstring(game:HttpGet("https://raw.githubusercontent.com/REDZHUB/BloxFruits/main/redz7.lua"))()
         end)
-        Section1:NewButton("Chaos
+        Section1:NewButton("Chaos Hub (Brookhaven)", "Brookhaven hilesi", function()
+            loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Chaos-Hub-31051"))()
+        end)
+
+        -- Ayarlar ve Kapatma
+        Section2:NewButton("Menüyü Gizle", "Menüyü ekranından saklar", function()
+            Library:ToggleUI()
+        end)
+        Section2:NewSlider("Hız (WalkSpeed)", "Hızını Ayarlar", 500, 16, function(s)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+        end)
+    else
+        print("Hatalı Anahtar!")
+    end
+end)

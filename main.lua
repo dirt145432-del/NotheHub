@@ -1,58 +1,37 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Nothe Hub", "DarkTheme")
 
-local Window = Rayfield:CreateWindow({
-   Name = "Nothe Hub",
-   LoadingTitle = "Nothe Hub Yükleniyor...",
-   LoadingStatus = "Hazırlanıyor",
-   ConfigurationSaving = {
-      Enabled = true,
-      FolderName = "NotheHubConfig",
-      FileName = "MainConfig"
-   }
-})
+-- Sekmeler
+local Tab1 = Window:NewTab("Oyun Scriptleri")
+local Section1 = Tab1:NewSection("Hızlı Yükle")
 
-local TrollTab = Window:CreateTab("Troll", 4483345998) -- Troll Sekmesi
+local Tab2 = Window:NewTab("Ayarlar")
+local Section2 = Tab2:NewSection("Karakter Ayarları")
 
--- OYUNCU ÖLDÜRME BÖLÜMÜ
-TrollTab:CreateSection("Oyuncu Öldürme (Kill)")
+-- Brookhaven & Chaos Hub (Güncel Link)
+Section1:NewButton("Chaos Hub (Brookhaven)", "Yüklenmesi 5-10 saniye sürebilir", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Doom_H/Chaos-Hub/main/source'))()
+end)
 
-TrollTab:CreateButton({
-   Name = "Kill All (Herkesi Öldür)",
-   Callback = function()
-       -- Bu kod çoğu oyunda 'TouchInterest' kullanarak çalışır
-       for i, v in pairs(game.Players:GetPlayers()) do
-           if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-               pcall(function()
-                   v.Character.Humanoid.Health = 0
-               end)
-           end
-       end
-   end,
-})
+-- Chilli Hub (Yedek Link)
+Section1:NewButton("Chilli Hub", "Chilli Hub Scriptini Yukler", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ChilliHacks/ChilliHub/main/Source"))()
+end)
 
-TrollTab:CreateButton({
-   Name = "Kill Random (Rastgele Öldür)",
-   Callback = function()
-       local players = game.Players:GetPlayers()
-       local randomPlayer = players[math.random(1, #players)]
-       if randomPlayer.Character then
-           randomPlayer.Character.Humanoid.Health = 0
-       end
-   end,
-})
+-- Blox Fruits (Alternatif Link)
+Section1:NewButton("Redz Hub (Blox Fruits)", "Auto Farm", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/REDZHUB/BloxFruits/main/redz7.lua"))()
+end)
 
-TrollTab:CreateButton({
-   Name = "Kill Nearest (En Yakındakini Öldür)",
-   Callback = function()
-       local target = nil
-       local dist = math.huge
-       for i, v in pairs(game.Players:GetPlayers()) do
-           if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
-               local mag = (v.Character.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-               if mag < dist then
-                   dist = mag
-                   target = v
-               end
-           end
-       end
-       if target then target.Character.Humanoid.Health = 0 end
+-- Karakter Ayarları (Menü içi olduğu için her zaman çalışır)
+Section2:NewSlider("Hız (WalkSpeed)", "Hız Ayarı", 500, 16, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+Section2:NewSlider("Zıplama (JumpPower)", "Zıplama Ayarı", 500, 50, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+
+Section2:NewButton("Menüyü Gizle", "Menüyü Saklar", function()
+    Library:ToggleUI()
+end)
